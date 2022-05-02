@@ -1,6 +1,6 @@
 
 <template>
-  Welcome to Investment Manager app!
+  Welcome to Investment Manager app
 </template>
 
 <script setup lang="ts">
