@@ -1,4 +1,3 @@
-
 <template>
   Welcome to Investment Manager app
 </template>

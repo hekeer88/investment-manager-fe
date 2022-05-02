@@ -15,8 +15,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <RouterLink to="/persons" class="nav-link text-dark" active-class="active">Persons
-                                ({{ personsStore.personCount }} - {{ personsStore.persons.length }})</RouterLink>
+                            <RouterLink to="/portfolios" class="nav-link text-dark" active-class="active">Portfolios
+                                ({{ portfoliosStore.personCount }} - {{ portfoliosStore.portfolios.length }})</RouterLink>
                         </li>
                         <li class="nav-item">
                             <RouterLink to="/contacts" class="nav-link text-dark" active-class="active">Contacts
@@ -56,7 +56,7 @@
 
 <script lang="ts">
 import { useIdentityStore } from "@/stores/identity";
-import { usePersonsStore } from "@/stores/persons";
+import { usePortfoliosStore } from "@/stores/portfolios";
 import { Options, Vue } from "vue-class-component";
 import { RouterLink } from "vue-router";
 
@@ -65,7 +65,7 @@ import { RouterLink } from "vue-router";
     }
 })
 export default class Header extends Vue {
-    personsStore = usePersonsStore();
+    portfoliosStore = usePortfoliosStore();
     identityStore = useIdentityStore();
 
 

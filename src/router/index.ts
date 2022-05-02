@@ -23,6 +23,12 @@ const router = createRouter({
       component: Login,
     },
 
+    { path: "/portfolios", name: "portfolios", component: ContactIndex },
+
+
+
+
+    // TODO: delete later
     { path: "/contacts", name: "contacts", component: ContactIndex },
     { path: "/persons", name: "persons", component: PersonIndex},
     { path: "/persons/index", name: "personsindex", component: PersonIndex},
