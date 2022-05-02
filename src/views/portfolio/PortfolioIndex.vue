@@ -13,9 +13,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item of personsStore.persons" :key="item.id">
-                <td>{{ item.firstName }}</td>
-                <td>{{ item.lastName }}</td>
+            <tr v-for="item of portfoliosStore.portfolios" :key="item.id">
+                <td>{{ item.name }}</td>
+                <td>{{ item.description }}</td>
                 <td>
                     <RouterLink :to="{ name: 'personsedit', params: { id: item.id } }">Edit</RouterLink> |
                     <a href="/Persons/Details/d31d15f4-517c-43b1-a1b8-5dac38c99c01">Details</a> |
@@ -40,8 +40,8 @@ import { Options, Vue } from "vue-class-component";
 export default class PortfolioIndex extends Vue {
     id: string = "foobar";
 
-    personsStore = usePortfoliosStore();
-    personService = new PortfolioService();
+    portfoliosStore = usePortfoliosStore();
+    portfolioService = new PortfolioService();
 
     /*
       constructor() {
@@ -52,8 +52,8 @@ export default class PortfolioIndex extends Vue {
 
     async mounted(): Promise<void> {
         console.log("mounted");
-        this.personsStore.$state.portfolios =
-            await this.personService.getAll();
+        this.portfoliosStore.$state.portfolios =
+            await this.portfolioService.getAll();
     }
 
 }

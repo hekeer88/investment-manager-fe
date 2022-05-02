@@ -16,8 +16,8 @@ import { RouterLink, RouterView } from "vue-router";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 
-import { usePersonsStore } from "@/stores/persons";
-import { PersonService } from "./services/PersonService";
+import { usePortfoliosStore } from "@/stores/portfolios";
+import { PortfolioService } from "./services/PortfolioService";
 
 @Options({
   components: {
@@ -25,8 +25,8 @@ import { PersonService } from "./services/PersonService";
   }
 })
 export default class App extends Vue {
-  personsStore = usePersonsStore();
-  personService = new PersonService();
+  portfoliosStore = usePortfoliosStore();
+  portfolioService = new PortfolioService();
 
   /*
     constructor() {
@@ -37,8 +37,8 @@ export default class App extends Vue {
 
   async mounted(): Promise<void> {
     console.log("mounted");
-    this.personsStore.$state.persons =
-      await this.personService.getAll();
+    this.portfoliosStore.$state.portfolios =
+      await this.portfolioService.getAll();
   }
 }
 </script>

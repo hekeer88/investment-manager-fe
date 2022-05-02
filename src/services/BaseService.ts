@@ -15,8 +15,9 @@ export class BaseService<TEntity> {
         try {
             let response = await httpCLient.get(`/${this.path}`, {
                 headers: {
-                    "Authorization": "bearer " + this.identityStore.$state.jwt?.token
+                    "Authorization": "bearer " + this.identityStore.$state.jwt?.token        
                 }
+                
             });
             console.log(response);
 
