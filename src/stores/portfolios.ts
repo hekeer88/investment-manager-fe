@@ -6,10 +6,15 @@ export const usePortfoliosStore = defineStore({
   id: "portfolios",
   state: () => ({
     portfolios: [
+      {
+        id: '1/23/',
+        name: "port name",
+        description: 'test descrition'
+      }
     ] as IPortfolio[],
   }),
   getters: {
-    personCount: (state) => state.portfolios.length,
+    portfolioCount: (state) => state.portfolios.length,
   },
   actions: {
     add(portfolio: IPortfolio) {

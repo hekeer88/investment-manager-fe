@@ -19,6 +19,7 @@ import Footer from "./components/Footer.vue";
 import { usePortfoliosStore } from "@/stores/portfolios";
 import { PortfolioService } from "./services/PortfolioService";
 
+
 @Options({
   components: {
     Header, Footer

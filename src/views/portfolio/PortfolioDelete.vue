@@ -12,5 +12,5 @@ import { RouterLink } from "vue-router";
   props: {},
   emits: [],
     })
-    export default class PersonDelete extends Vue {}
+    export default class PortfolioDelete extends Vue {}
 </script>

@@ -1,5 +1,5 @@
 <template>
-    Person Edit
+    Portfolio Edit
     <h1>Edit {{id}}</h1>
 </template>
 
@@ -15,7 +15,7 @@ import { RouterLink } from "vue-router";
   },
   emits: [],
     })
-    export default class PersonEdit extends Vue {
+    export default class PortfolioEdit extends Vue {
         id!: String
     }
 </script>

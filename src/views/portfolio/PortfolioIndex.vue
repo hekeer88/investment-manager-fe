@@ -2,7 +2,7 @@
     <h1>Portfolios</h1>
 
     <p>
-        <RouterLink to="/persons/create">Create new</RouterLink>
+        <RouterLink to="/portfolios/create">Create new</RouterLink>
     </p>
     <table class="table">
         <thead>
@@ -17,7 +17,7 @@
                 <td>{{ item.name }}</td>
                 <td>{{ item.description }}</td>
                 <td>
-                    <RouterLink :to="{ name: 'personsedit', params: { id: item.id } }">Edit</RouterLink> |
+                    <RouterLink :to="{ name: 'portfoliosedit', params: { id: item.id } }">Edit</RouterLink> |
                     <a href="/Persons/Details/d31d15f4-517c-43b1-a1b8-5dac38c99c01">Details</a> |
                     <a href="/Persons/Delete/d31d15f4-517c-43b1-a1b8-5dac38c99c01">Delete</a>
                 </td>
