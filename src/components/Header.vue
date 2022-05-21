@@ -43,14 +43,14 @@
                             </li>
                         </template>
                         <template v-else>
-                            <li className="nav-item dropdown">
-                                <RouterLink to="/loans" class="nav-link dropdown-toggle text-dark" id="navbarDropdown"
+                            <li class="nav-item dropdown" >
+                                <RouterLink to="/" class="nav-link dropdown-toggle text-dark"
                                     role="button" data-bs-toggle="dropdown" aria-expanded="false">{{
                                             identityStore.jwt?.firstName
                                     }}
                                 </RouterLink>
-                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li className="nav-item">
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li class="nav-item">
                                         <RouterLink to="/identity/account/logout" class="nav-link text-dark"
                                             active-class="active">Logout
                                         </RouterLink>
