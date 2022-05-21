@@ -1,5 +1,5 @@
 <template>
-    <h1>Login</h1>
+    <h3>Login</h3>
 
     <div class="row">
         <div class="col-md-12">
@@ -19,6 +19,7 @@
                     <label class="control-label" for="LastName">password</label>
                     <input v-model="password" class="form-control" type="password" />
                 </div>
+                <br>
                 <div class="form-group">
                     <input @click="loginClicked()" type="submit" value="Login" class="btn btn-primary" />
                 </div>
@@ -53,7 +54,7 @@ export default class Login extends Vue {
     async loginClicked(): Promise<void> {
         console.log('submitClicked');
         var res = await this.identityService.login(this.email, this.password);
-        console.log(res.data);
+        console.log(res);
         this.identityStore.$state.jwt = res.data!;
         this.$router.push('/portfolios');
 

@@ -66,14 +66,14 @@ export class BaseService<TEntity> {
             res = await httpCLient.put(`/${this.path}/${id}`, entity,
                 {
                     headers: {
-                        "Authorization": "bearer " + localStorage.getItem('token')
+                        "Authorization": "bearer " + this.identityStore.$state.jwt?.token
                     }
                 }
             );
         } catch (e) {
             let res = {
                 status: (e as AxiosError).response!.status,
-                // errorMsg: (e as AxiosError).response!.data.error,
+                errorMsg: (e as AxiosError).response!.data.error,
             }
             console.log('res', e);
             return res;
@@ -105,5 +105,26 @@ export class BaseService<TEntity> {
         }
 
         return { status: response.status };
+    }
+
+    async delete(id: string): Promise<void> {
+        console.log("delete", id);
+        let res;
+        try {
+            res = await httpCLient.delete(`/${this.path}/${id}`,
+                {
+                    headers: {
+                        "Authorization": "bearer " + this.identityStore.$state.jwt?.token
+                    }
+                }
+            );
+        } catch (e) {
+            let res = {
+                status: (e as AxiosError).response!.status,
+                errorMsg: (e as AxiosError).response!.data.error,
+            }
+        }
+        let response = await httpCLient.delete(`/${this.path}/${id}`);
+        console.log("response: ", response);
     }
 }

@@ -1,6 +1,5 @@
 <template>
-    <h1>Create</h1>
-
+    <h3>Create</h3>
     <h4>Portfolio</h4>
     <hr />
     <div class="row">
@@ -21,6 +20,7 @@
                     <label class="control-label" for="description">Description</label>
                     <input v-model="description" class="form-control" type="text" />
                 </div>
+                <br>
                 <div class="form-group">
                     <input @click="submitClicked()" type="submit" value="Create" class="btn btn-primary" />
                 </div>

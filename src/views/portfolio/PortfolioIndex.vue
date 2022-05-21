@@ -2,7 +2,7 @@
     <h3>Portfolios</h3>
 
     <p>
-        <RouterLink class="btn btn-success" to="portfolioscreate">Create new</RouterLink>
+        <RouterLink class="btn btn-success" to="/portfolios/create">Create new</RouterLink>
     </p>
 
     <table class="table align-middle mb-0 bg-white">
@@ -31,7 +31,10 @@
                 </td> -->
                 <td>TODO: balance here</td>
                 <td>
-                    <RouterLink class="btn btn-link btn-sm btn-rounded" :to="{ name: 'portfoliosedit', params: { id: item.id } }">Edit</RouterLink>
+                    <button @click="editClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
+                        data-mdb-ripple-color="dark">
+                        Edit
+                    </button>
                 </td>
             </tr>
         </tbody>
@@ -39,6 +42,7 @@
 </template>
 
 <script lang="ts">
+import type { IPortfolio } from "@/domain/IPortfolio";
 import { PortfolioService } from "@/services/PortfolioService";
 import { usePortfoliosStore } from "@/stores/portfolios";
 import { Options, Vue } from "vue-class-component";
@@ -64,6 +68,12 @@ export default class PortfolioIndex extends Vue {
         
       }
         */
+
+    async editClicked(portfolio: IPortfolio): Promise<void> {
+        console.log('editClicked');
+        this.portfoliosStore.$state.portfolio = portfolio;
+        this.$router.push({name:'portfoliosedit', params: {id: portfolio.id}});
+    }
 
     async mounted(): Promise<void> {
         console.log("mounted");

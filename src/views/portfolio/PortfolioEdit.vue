@@ -1,6 +1,6 @@
 <template>
     Portfolio Edit
-    <h2>Edit Porfolio: {{ portfoliosStore.getPortfolioById(id)?.name }}</h2>
+    <h2>Edit Porfolio: {{ portfoliosStore.portfolio.name }}</h2>
     <hr />
     <div class="row">
         <div class="col-md-12">
@@ -15,8 +15,10 @@
                     <label class="control-label" for="description">Description</label>
                     <input class="form-control" type="text" v-model="description" />
                 </div>
+                <br>
                 <div class="form-group">
                     <input @click="submitClicked()" type="submit" value="Edit" class="btn btn-primary" />
+                    <input @click="deletePortfolio()" type="submit" value="Delete" class="btn btn-danger" />
                 </div>
 
 
@@ -52,12 +54,12 @@ export default class PortfolioEdit extends Vue {
     portfolioService = new PortfolioService();
     portfoliosStore = usePortfoliosStore();
 
-    portfolio = this.portfoliosStore.getPortfolioById('3e97a4bb-62c2-496f-9adf-0442536d349c');
+    portfolio = this.portfoliosStore.portfolio;
 
 
-    id: string = "this.portfolio!.id!";
-    name: string = "this.props.toString()";
-    description: string = "this.portfolio!.description";
+    id: string = this.portfolio.id!;
+    name: string = this.portfolio.name!;
+    description?: string = this.portfolio.description;
     errorMsg: string | null = null;
 
     async submitClicked(): Promise<void> {
@@ -70,7 +72,7 @@ export default class PortfolioEdit extends Vue {
                 {
                     id: this.id,
                     name: this.name,
-                    description: this.description,
+                    description: this.description ?? "",
                 }
             );
 
@@ -88,6 +90,15 @@ export default class PortfolioEdit extends Vue {
         }
     }
 
+    async deletePortfolio(): Promise<void> {
+        console.log('deleteClicked');
+        var res = await this.portfolioService.delete(this.id);
+
+        this.portfoliosStore.$state.portfolios =
+            await this.portfolioService.getAll();
+
+        this.$router.push('/portfolios');
+    }
 }
 
 function emits(arg0: { components: {}; props: { id: StringConstructor; }; }, arg1: { item: any; }, emits: any, arg3: never[]) {
