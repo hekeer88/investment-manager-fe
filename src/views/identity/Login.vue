@@ -53,9 +53,9 @@ export default class Login extends Vue {
     async loginClicked(): Promise<void> {
         console.log('submitClicked');
         var res = await this.identityService.login(this.email, this.password);
-        console.log(res);
-
+        console.log(res.data);
         this.identityStore.$state.jwt = res.data!;
+        this.$router.push('/');
 
     }
 

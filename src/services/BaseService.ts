@@ -59,6 +59,30 @@ export class BaseService<TEntity> {
         return res;
     }
 
+    async put(id: string, entity: TEntity): Promise<IServiceResult<void>> {
+        console.log("put", id, entity);
+        let res;
+        try {
+            res = await httpCLient.put(`/${this.path}/${id}`, entity,
+                {
+                    headers: {
+                        "Authorization": "bearer " + localStorage.getItem('token')
+                    }
+                }
+            );
+        } catch (e) {
+            let res = {
+                status: (e as AxiosError).response!.status,
+                // errorMsg: (e as AxiosError).response!.data.error,
+            }
+            console.log('res', e);
+            return res;
+        }
+
+        return { status: res.status };
+    }
+
+    // TODO: add header authorization in every function
     async add(entity: TEntity): Promise<IServiceResult<void>> {
         console.log("add");
 

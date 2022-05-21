@@ -16,6 +16,7 @@ import PortfolioDelete from "@/views/portfolio/PortfolioDelete.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+   
     {
       path: "/",
       name: "home",
@@ -32,8 +33,6 @@ const router = createRouter({
     { path: "/portfolios/create", name: "portfolioscreate", component: PortfolioCreate },
     { path: "/portfolios/edit/:id", name: "portfoliosedit", component: PortfolioEdit, props: true },
     { path: "/portfolios/delete/:id", name: "portfoliosdelete", component: PortfolioDelete, props: true },
-
-
 
 
     // TODO: delete later

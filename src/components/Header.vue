@@ -3,35 +3,36 @@
         <nav
             class="container navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">WebApp</a>
+                <a class="navbar-brand" href="/">WebApp - ({{ portfoliosStore.portfolioCount }} - {{
+                        portfoliosStore.portfolios.length
+                }})</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <RouterLink to="/" class="nav-link text-dark" active-class="active">Home</RouterLink>
-                        </li>
 
-                        <li class="nav-item">
-                            <RouterLink to="/portfolios" class="nav-link text-dark" active-class="active">Portfolios
-                                ({{ portfoliosStore.personCount }} - {{ portfoliosStore.portfolios.length }})</RouterLink>
-                        </li>
-                        <li class="nav-item">
-                            <RouterLink to="/contacts" class="nav-link text-dark" active-class="active">Contacts
-                            </RouterLink>
-                        </li>
-                        <li class="nav-item">
-                            <RouterLink to="/contacttypes" class="nav-link text-dark" active-class="active">ContactTypes
-                            </RouterLink>
-                        </li>
+                        <template v-if="identityStore.$state.jwt != null">
+                            <li class="nav-item">
+                                <RouterLink to="/portfolios" class="nav-link text-dark" active-class="active">Portfolios
+                                </RouterLink>
+                            </li>
+                            <li class="nav-item">
+                                <RouterLink to="/stocks" class="nav-link text-dark" active-class="active">Stocks
+                                </RouterLink>
+                            </li>
+                            <li class="nav-item">
+                                <RouterLink to="/loans" class="nav-link text-dark" active-class="active">Loans
+                                </RouterLink>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Home/Privacy">Privacy</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="/Home/Privacy">Privacy</a>
+                            </li>
+                        </template>
+
                     </ul>
-
                     <ul class="navbar-nav">
                         <template v-if="identityStore.$state.jwt == null">
                             <li class="nav-item">
@@ -42,10 +43,24 @@
                             </li>
                         </template>
                         <template v-else>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" href="/identity/account/logout">Logout</a>
+                            <li className="nav-item dropdown">
+                                <RouterLink to="/loans" class="nav-link dropdown-toggle text-dark" id="navbarDropdown"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">{{
+                                            identityStore.jwt?.firstName
+                                    }}
+                                </RouterLink>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li className="nav-item">
+                                        <RouterLink to="/identity/account/logout" class="nav-link text-dark"
+                                            active-class="active">Logout
+                                        </RouterLink>
+                                    </li>
+
+                                </ul>
+
                             </li>
                         </template>
+
                     </ul>
                 </div>
             </div>

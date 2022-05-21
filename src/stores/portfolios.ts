@@ -5,20 +5,18 @@ import { defineStore } from "pinia";
 export const usePortfoliosStore = defineStore({
   id: "portfolios",
   state: () => ({
-    portfolios: [
-      {
-        id: '1/23/',
-        name: "port name",
-        description: 'test descrition'
-      }
-    ] as IPortfolio[],
+    portfolios: [] as IPortfolio[],
+    portfolio: {} as IPortfolio,
   }),
-  getters: {
+  getters: { // for doung business logic or smthig with store parameters
     portfolioCount: (state) => state.portfolios.length,
+    getPortfolioById: (state) => {
+      return (id: string) => state.portfolios.find((portfolio) => portfolio.id === id)
+    },
   },
-  actions: {
+  actions: { // if you need to modife state more complex way(in other chase u can also modify directly)
     add(portfolio: IPortfolio) {
       this.portfolios.push(portfolio);
     }
-  },
+  }
 });
