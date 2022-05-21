@@ -1,26 +1,37 @@
 <template>
-    <h1>Portfolios</h1>
+    <h3>Portfolios</h3>
 
     <p>
-        <RouterLink to="portfolioscreate">Create new</RouterLink>
+        <RouterLink class="btn btn-success" to="portfolioscreate">Create new</RouterLink>
     </p>
-    <table class="table">
-        <thead>
+
+    <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
             <tr>
                 <th>Name</th>
-                <th>Description</th>
-                <th></th>
+                <th>Balance</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="item of portfoliosStore.portfolios" :key="item.id">
                 <td>
-                    {{item.name}}
+                    <div class="d-flex align-items-center">
+                        <img src="https://cdn-icons-png.flaticon.com/512/4599/4599792.png" alt=""
+                            style="width: 45px; height: 45px" class="rounded-circle" />
+                        <div class="ms-3">
+                            <p class="fw-bold mb-1">{{ item.name }}</p>
+                            <p class="text-muted mb-0">{{ item.description }}</p>
+                        </div>
+                    </div>
                 </td>
-                <td>{{ item.description }}</td>
+                <!-- <td>
+                    <p class="fw-normal mb-1">Software engineer</p>
+                    <p class="text-muted mb-0">IT department</p>
+                </td> -->
+                <td>TODO: balance here</td>
                 <td>
-                    <RouterLink :to="{ name: 'portfoliosedit', params: { id: item.id } }">Edit</RouterLink> |
-                    <a href="/Persons/Delete/d31d15f4-517c-43b1-a1b8-5dac38c99c01">Delete</a>
+                    <RouterLink class="btn btn-link btn-sm btn-rounded" :to="{ name: 'portfoliosedit', params: { id: item.id } }">Edit</RouterLink>
                 </td>
             </tr>
         </tbody>
@@ -45,7 +56,7 @@ export default class PortfolioIndex extends Vue {
     portfoliosStore = usePortfoliosStore();
     portfolioService = new PortfolioService();
 
-    
+
 
     /*
       constructor() {

@@ -26,10 +26,6 @@
                                 <RouterLink to="/loans" class="nav-link text-dark" active-class="active">Loans
                                 </RouterLink>
                             </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" href="/Home/Privacy">Privacy</a>
-                            </li>
                         </template>
 
                     </ul>
