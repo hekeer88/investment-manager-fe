@@ -20,9 +20,9 @@
                     <label class="control-label" for="description">Description</label>
                     <input v-model="description" class="form-control" type="text" />
                 </div>
-                <br>
+                <hr />
                 <div class="form-group">
-                    <input @click="submitClicked()" type="submit" value="Create" class="btn btn-primary" />
+                    <input @click="submitClicked()" type="submit" value="Create Portfolio" class="btn btn-success" />
                 </div>
             </div>
         </div>
@@ -83,12 +83,3 @@ export default class PortfolioCreate extends Vue {
     }
 }
 </script>
-
-
-<!-- function usePortfolioStore() {
-  throw new Error("Function not implemented.");
-}
-
-function usePortfolioStore() {
-  throw new Error("Function not implemented.");
-} -->

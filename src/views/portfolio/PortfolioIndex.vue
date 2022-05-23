@@ -55,7 +55,7 @@ import { RouterLink } from "vue-router";
     emits: [],
 })
 export default class PortfolioIndex extends Vue {
-    id: string = "foobar";
+    // id: string = "foobar";
 
     portfoliosStore = usePortfoliosStore();
     portfolioService = new PortfolioService();

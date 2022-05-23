@@ -71,17 +71,17 @@ export default class Login extends Vue {
 
     async register(): Promise<void> {
 
-        if (this.firstName.length < 1 || this.lastName.length < 1) {
-            this.errorMsg = '⛔️ Please enter both names'
-        }
-        else if (this.email.length < 5) {
-            this.errorMsg = '⛔️ Valid email is 5 minimum characters'
-        }
-        else if (this.password.length < 1) {
-            this.errorMsg = '⛔️ Minimum password length is 1 character'
-        }
-        else if (this.password !== this.confirmedPassword) {
-            this.errorMsg = '⛔️ The passwords are not the same'
+    if (this.firstName.length < 1 || this.lastName.length < 1) {
+        this.errorMsg = '⛔️ Please enter both names'
+    }
+    else if (this.email.length < 5) {
+        this.errorMsg = '⛔️ Valid email is 5 minimum characters'
+    }
+    else if (this.password.length < 1) {
+        this.errorMsg = '⛔️ Minimum password length is 1 character'
+    }
+    else if (this.password !== this.confirmedPassword) {
+        this.errorMsg = '⛔️ The passwords are not the same'
         } else {
             var res = await this.identityService.register({
                 email: this.email,

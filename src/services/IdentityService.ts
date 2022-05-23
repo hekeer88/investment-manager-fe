@@ -28,7 +28,6 @@ export class IdentityService {
             }
 
             console.log(response);
-
             console.log((e as AxiosError).response);
 
             return response;
