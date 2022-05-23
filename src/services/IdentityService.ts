@@ -1,4 +1,5 @@
 import type { IJWTResponse } from "@/domain/IJWTResponse";
+import type { IRegister } from "@/domain/IRegister";
 import httpCLient from "@/http-client";
 import { useIdentityStore } from "@/stores/identity";
 import type { AxiosError } from "axios";
@@ -32,9 +33,32 @@ export class IdentityService {
 
             return response;
         }
+    }
 
+    async register(register: IRegister): Promise<IServiceResult<IJWTResponse>> {
+        console.log("register service");
 
+        let response;
+        try {
+            response = await httpCLient.post("/identity/account/register", register);
+            return {
+                status: response.status,
+                data: response.data as IJWTResponse
+            };
 
+        } catch (e) {
+            console.log("e", e)
+            let response = {    
+                status: (e as AxiosError).response!.status,
+                errorMsg: (e as AxiosError).response!.data.errors,
+            }
+
+            console.log("test", response);
+
+            console.log((e as AxiosError).response);
+
+            return response;
+        }
     }
 
     async refreshIdentity(): Promise<IServiceResult<IJWTResponse>> {
@@ -57,7 +81,7 @@ export class IdentityService {
                 errorMsg: (e as AxiosError).response!.data.error,
             }
 
-            console.log(response);
+            console.log(response.errorMsg);
 
             console.log((e as AxiosError).response);
 

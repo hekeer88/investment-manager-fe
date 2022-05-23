@@ -78,7 +78,7 @@ export default class PortfolioCreate extends Vue {
                 this.$router.push('/portfolios');
             }
         } else {
-            this.errorMsg = 'Name is too short!';
+            this.errorMsg = '⛔️ Name is too short!';
         }
     }
 }

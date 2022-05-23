@@ -1,6 +1,14 @@
+<!-- <style>
+
+.container {
+margin: auto;
+width: 90%;
+padding: 10px;
+}
+</style> -->
+
 <template>
   <Header />
-
   <div class="container">
     <main role="main" class="pb-3">
       <RouterView />

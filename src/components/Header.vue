@@ -30,7 +30,7 @@
                     <ul class="navbar-nav">
                         <template v-if="identityStore.$state.jwt == null">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="/Identity/Account/Register">Register</a>
+                                <a class="nav-link text-dark" href="/identity/account/register">Sign Up</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" href="/identity/account/login">Login</a>

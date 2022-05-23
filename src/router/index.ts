@@ -1,11 +1,12 @@
 
-import Login from "@/views/identity/Login.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import PortfolioIndex from "@/views/portfolio/PortfolioIndex.vue";
 import PortfolioCreate from "@/views/portfolio/PortfolioCreate.vue";
 import PortfolioEdit from "@/views/portfolio/PortfolioEdit.vue";
+import Register from "@/views/identity/Register.vue";
+import Login from "@/views/identity/Login.vue";
 
 
 const router = createRouter({
@@ -21,6 +22,11 @@ const router = createRouter({
       path: "/identity/account/login",
       name: "login",
       component: Login,
+    },
+    {
+      path: "/identity/account/register",
+      name: "register",
+      component: Register,
     },
 
     { path: "/portfolios", name: "portfolios", component: PortfolioIndex },
