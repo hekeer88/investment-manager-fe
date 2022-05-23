@@ -92,7 +92,7 @@ export default class PortfolioEdit extends Vue {
 
     async deletePortfolio(): Promise<void> {
         console.log('deleteClicked');
-        var res = await this.portfolioService.delete(this.id);
+        await this.portfolioService.delete(this.id);
 
         this.portfoliosStore.$state.portfolios =
             await this.portfolioService.getAll();

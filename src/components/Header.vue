@@ -3,9 +3,7 @@
         <nav
             class="container navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">WebApp - ({{ portfoliosStore.portfolioCount }} - {{
-                        portfoliosStore.portfolios.length
-                }})</a>
+                <a class="navbar-brand" href="/">Investment Manager</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
