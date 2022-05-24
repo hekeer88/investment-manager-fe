@@ -4,7 +4,8 @@ import { defineStore } from "pinia";
 export const useStocksStore = defineStore({
   id: "stocks",
   state: () => ({
-    stocks: [] as IStock[]
+    stocks: [] as IStock[],
+    stock: {} as IStock,
   }),
   getters: {  // for doung business logic or smthig with store parameters
   },

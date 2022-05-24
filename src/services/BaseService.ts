@@ -124,7 +124,7 @@ export class BaseService<TEntity> {
                 errorMsg: (e as AxiosError).response!.data.error,
             }
         }
-        let response = await httpCLient.delete(`/${this.path}/${id}`);
-        console.log("response: ", response);
+        // let response = await httpCLient.delete(`/${this.path}/${id}`);
+        console.log("response: ", res);
     }
 }

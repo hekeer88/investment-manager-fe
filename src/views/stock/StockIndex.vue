@@ -75,8 +75,8 @@ export default class StockIndex extends Vue {
 
     async editClicked(stock: IStock): Promise<void> {
         console.log('editClicked');
-        // this.portfoliosStore.$state.portfolio = portfolio;
-        // this.$router.push({name:'portfoliosedit', params: {id: portfolio.id}});
+        this.stockStore.$state.stock = stock;
+        this.$router.push({name:'stocksedit', params: {id: stock.id}});
     }
 
     async mounted(): Promise<void> {

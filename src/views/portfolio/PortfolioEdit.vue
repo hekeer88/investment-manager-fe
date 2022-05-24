@@ -3,13 +3,11 @@
     <h2>Edit Porfolio: {{ portfoliosStore.portfolio.name }}</h2>
     <hr />
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div>
-
                 <div class="form-group">
                     <label class="control-label" for="name">Name</label>
                     <input class="form-control" type="text" v-model="name" />
-
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="description">Description</label>
@@ -17,11 +15,9 @@
                 </div>
                 <br>
                 <div class="form-group">
-                    <input @click="submitClicked()" type="submit" value="Edit" class="btn btn-primary" />
+                    <input @click="submitClicked()" type="submit" value="Edit" class="btn btn-secondary" />
                     <input @click="deletePortfolio()" type="submit" value="Delete" class="btn btn-danger" />
                 </div>
-
-
             </div>
         </div>
     </div>
