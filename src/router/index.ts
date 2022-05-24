@@ -10,6 +10,9 @@ import PortfolioEdit from "@/views/portfolio/PortfolioEdit.vue";
 import StockIndex from "@/views/stock/StockIndex.vue";
 import StockCreate from "@/views/stock/StockCreate.vue";
 import StockEdit from "@/views/stock/StockEdit.vue";
+import LoanIndex from "@/views/loan/LoanIndex.vue";
+import LoanCreate from "@/views/loan/LoanCreate.vue";
+import LoanEdit from "@/views/loan/LoanEdit.vue";
 
 
 
@@ -42,6 +45,11 @@ const router = createRouter({
     { path: "/stocks/index", name: "stocksindex", component: StockIndex },
     { path: "/stocks/create", name: "stockscreate", component: StockCreate },
     { path: "/stocks/edit/:id", name: "stocksedit", component: StockEdit, props: true },
+
+    { path: "/loans", name: "loans", component: LoanIndex },
+    { path: "/loans/index", name: "loansindex", component: LoanIndex },
+    { path: "/loans/create", name: "loanscreate", component: LoanCreate },
+    { path: "/loans/edit/:id", name: "loansedit", component: LoanEdit, props: true },
     
 
   ]
