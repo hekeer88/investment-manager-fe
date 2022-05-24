@@ -26,31 +26,27 @@
                 <div class="col-12">
                     <label class="control-label" for="portfolioId">Choose portfolio</label>
                     <select v-model="portfolioId" class="form-select" id="portfolioId">
-                        <option v-for="item of portfoliosStore.portfolios" v-bind:value="item.id" :key="item.id">
-                            {{ item.name }}
+                        <option v-for="portfolio of portfoliosStore.portfolios" v-bind:value="portfolio.id"
+                            :key="portfolio.id">
+                            {{ portfolio.name }}
                         </option>
                     </select>
                 </div>
-
                 <div class="col-12">
-
                     <label class="control-label" for="industryId">Choose industry</label>
                     <select v-model="industryId" class="form-select" id="industryId">
-
-                        <!-- <option v-for="item of portfoliosStore.portfolios" v-bind:value="item.id" :key="item.id">
-                            {{ item.name }}
-                        </option> -->
+                        <option v-for="industry of industriesStore.industries" v-bind:value="industry.id"
+                            :key="industry.id">
+                            {{ industry.name }}
+                        </option>
                     </select>
                 </div>
-
-
-
                 <div class="col-12">
                     <label class="control-label" for="regionId">Choose region</label>
                     <select v-model="regionId" class="form-select" id="regionId">
-                        <!-- <option v-for="item of portfoliosStore.portfolios" v-bind:value="item.id" :key="item.id">
-                        {{ item.name }}
-                        </option> -->
+                        <option v-for="region of regionsStore.regions" v-bind:value="region.id" :key="region.id">
+                            {{ region.country }}
+                        </option>
                     </select>
                 </div>
                 <hr />
@@ -61,8 +57,7 @@
         </div>
     </div>
     <div>
-
-        <a href="/stocks">Back to List</a>
+        <RouterLink to="/stocks">Back to List</RouterLink>
     </div>
 </template>
 
@@ -72,7 +67,11 @@
 import { StockService } from "@/services/StockService";
 import { usePortfoliosStore } from "@/stores/portfolios";
 import { useStocksStore } from "@/stores/stocks";
+import { useRegionsStore } from "@/stores/regions";
+import { useIndustriesStore } from "@/stores/industries";
 import { Options, Vue } from "vue-class-component";
+import { RegionService } from "@/services/RegionService";
+import { IndustryService } from "@/services/IndustryService";
 
 @Options({
     components: {
@@ -83,10 +82,12 @@ import { Options, Vue } from "vue-class-component";
 export default class StockCreate extends Vue {
     stockStore = useStocksStore();
     portfoliosStore = usePortfoliosStore();
-    stockService = new StockService();
+    industriesStore = useIndustriesStore();
+    regionsStore = useRegionsStore();
 
-    industryForm: boolean = false;
-    regionForm: boolean = false;
+    stockService = new StockService();
+    regionService = new RegionService();
+    industryService = new IndustryService();
 
     company: string = '';
     ticker: string = '';
@@ -98,10 +99,6 @@ export default class StockCreate extends Vue {
 
 
     async submitClicked(): Promise<void> {
-        console.log('submitClicked');
-        console.log(this.company, this.ticker);
-        console.log(this.portfoliosStore.portfolios)
-
 
         if (this.portfolioId.length == 0) {
             this.errorMsg = '⛔️ Choosing portfolio is required';
@@ -133,7 +130,14 @@ export default class StockCreate extends Vue {
             this.errorMsg = '⛔️ Please enter company name and ticker';
         }
     }
+
+    async mounted(): Promise<void> {
+        console.log("mounted");
+        this.industriesStore.$state.industries =
+            await this.industryService.getAll();
+        this.regionsStore.$state.regions =
+            await this.regionService.getAll();
+    }
 }
 </script>
-
 

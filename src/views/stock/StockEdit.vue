@@ -22,25 +22,27 @@
                 <div class="col-12">
                     <label class="control-label" for="portfolioId">Choose portfolio</label>
                     <select v-model="portfolioId" class="form-select" id="portfolioId">
-                        <option v-for="item of portfoliosStore.portfolios" v-bind:value="item.id" :key="item.id">
-                            {{ item.name }}
+                        <option v-for="portfolio of portfoliosStore.portfolios" v-bind:value="portfolio.id"
+                            :key="portfolio.id">
+                            {{ portfolio.name }}
                         </option>
                     </select>
                 </div>
                 <div class="col-12">
                     <label class="control-label" for="industryId">Choose industry</label>
                     <select v-model="industryId" class="form-select" id="industryId">
-                        <!-- <option v-for="item of portfoliosStore.portfolios" v-bind:value="item.id" :key="item.id">
-                            {{ item.name }}
-                        </option> -->
+                        <option v-for="industry of industriesStore.industries" v-bind:value="industry.id"
+                            :key="industry.id">
+                            {{ industry.name }}
+                        </option>
                     </select>
                 </div>
                 <div class="col-12">
                     <label class="control-label" for="regionId">Choose region</label>
                     <select v-model="regionId" class="form-select" id="regionId">
-                        <!-- <option v-for="item of portfoliosStore.portfolios" v-bind:value="item.id" :key="item.id">
-                        {{ item.name }}
-                        </option> -->
+                        <option v-for="region of regionsStore.regions" v-bind:value="region.id" :key="region.id">
+                            {{ region.country }}
+                        </option>
                     </select>
                 </div>
                 <br>
@@ -55,7 +57,7 @@
     </div>
 
     <div>
-        <a href="/stocks">Back to List</a>
+        <RouterLink to="/stocks">Back to List</RouterLink>
     </div>
 
 
@@ -63,8 +65,12 @@
 
 <script lang="ts">
 import type { IStock } from "@/domain/IStock";
+import { IndustryService } from "@/services/IndustryService";
+import { RegionService } from "@/services/RegionService";
 import { StockService } from "@/services/StockService";
+import { useIndustriesStore } from "@/stores/industries";
 import { usePortfoliosStore } from "@/stores/portfolios";
+import { useRegionsStore } from "@/stores/regions";
 import { useStocksStore } from "@/stores/stocks";
 import { propsToAttrMap } from "@vue/shared";
 import { Options, Vue } from "vue-class-component";
@@ -79,10 +85,14 @@ import { RouterLink } from "vue-router";
     emits: [],
 })
 export default class StockEdit extends Vue {
-
-    stockService = new StockService();
     stocksStore = useStocksStore();
     portfoliosStore = usePortfoliosStore();
+    industriesStore = useIndustriesStore();
+    regionsStore = useRegionsStore();
+
+    stockService = new StockService();
+    regionService = new RegionService();
+    industryService = new IndustryService();
 
     stock = this.stocksStore.stock;
 
@@ -98,7 +108,7 @@ export default class StockEdit extends Vue {
     async submitClicked(): Promise<void> {
         console.log('submitClicked');
 
-         if (this.portfolioId.length == 0) {
+        if (this.portfolioId.length == 0) {
             this.errorMsg = '⛔️ Choosing portfolio is required';
         }
 
@@ -130,7 +140,7 @@ export default class StockEdit extends Vue {
             this.errorMsg = '⛔️ Please enter company name and ticker';
         }
     }
-    
+
     async deleteStock(): Promise<void> {
         console.log('deleteClicked');
         await this.stockService.delete(this.id);
@@ -138,6 +148,16 @@ export default class StockEdit extends Vue {
             await this.stockService.getAll();
         this.$router.push('/stocks');
     }
+
+    async mounted(): Promise<void> {
+        console.log("mounted");
+        this.industriesStore.$state.industries =
+            await this.industryService.getAll();
+        this.regionsStore.$state.regions =
+            await this.regionService.getAll();
+    }
+
+
 }
 
 </script>

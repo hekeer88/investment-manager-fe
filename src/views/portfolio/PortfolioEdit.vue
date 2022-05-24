@@ -23,7 +23,7 @@
     </div>
 
     <div>
-        <a href="/Portfolios">Back to List</a>
+        <RouterLink to="/portfolios">Back to List</RouterLink>
     </div>
 
 
