@@ -13,6 +13,7 @@ Loan<template>
                 <th>Collateral</th>
                 <th>End Date</th>
                 <th>Interest</th> 
+                <th>Portfolio</th>
                 <th>Amount</th>
                 <th>Actions</th>
             </tr>
@@ -33,8 +34,8 @@ Loan<template>
                 <td>{{ item.collateral }}</td>
                 <td>{{ formatDate(item.endDate) }}</td>
                 <td>{{ item.interest }}%</td>
+                <td>{{ item.portfolio?.name }}</td>
                 <td class="fw-bold mb-1">${{ item.amount }}</td>
-                
                 <td>
                     <button @click="editClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
                         data-mdb-ripple-color="dark">

@@ -69,6 +69,8 @@ export default class PortfolioEdit extends Vue {
                     id: this.id,
                     name: this.name,
                     description: this.description ?? "",
+                    loanSum: this.portfolio.loanSum,
+                    stockSum: this.portfolio.stockSum,
                 }
             );
 

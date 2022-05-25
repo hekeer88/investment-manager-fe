@@ -12,8 +12,10 @@ export interface ILoan {
     amount:  number;
     scheduleType:  string;
     interest:  number;
+
     portfolioId:  string;
     portfolio:  IPortfolio | null;
+    
     regionId:  string;
     region:  IRegion | null;
 }

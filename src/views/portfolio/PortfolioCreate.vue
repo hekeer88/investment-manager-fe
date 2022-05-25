@@ -66,6 +66,8 @@ export default class PortfolioCreate extends Vue {
                 {
                     name: this.name,
                     description: this.description,
+                    stockSum: 0,
+                    loanSum: 0,
                 }
             );
 

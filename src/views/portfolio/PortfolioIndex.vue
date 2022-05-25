@@ -9,7 +9,9 @@
         <thead class="bg-light">
             <tr>
                 <th>Name</th>
-                <th>Balance</th>
+                <th>Stocks</th>
+                <th>Loans</th>
+                <th>Total</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -25,11 +27,9 @@
                         </div>
                     </div>
                 </td>
-                <!-- <td>
-                    <p class="fw-normal mb-1">Software engineer</p>
-                    <p class="text-muted mb-0">IT department</p>
-                </td> -->
-                <td>TODO: balance here</td>
+                <td> {{ item.stockSum }} </td>
+                <td> {{ item.loanSum }} </td>
+                <td class="fw-bold mb-1"> {{ item.loanSum }} </td>
                 <td>
                     <button @click="editClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
                         data-mdb-ripple-color="dark">
@@ -44,7 +44,9 @@
 <script lang="ts">
 import type { IPortfolio } from "@/domain/IPortfolio";
 import { PortfolioService } from "@/services/PortfolioService";
+import { StockService } from "@/services/StockService";
 import { usePortfoliosStore } from "@/stores/portfolios";
+import { useStocksStore } from "@/stores/stocks";
 import { Options, Vue } from "vue-class-component";
 import { RouterLink } from "vue-router";
 
@@ -56,10 +58,10 @@ import { RouterLink } from "vue-router";
 })
 export default class PortfolioIndex extends Vue {
     // id: string = "foobar";
-
     portfoliosStore = usePortfoliosStore();
     portfolioService = new PortfolioService();
-
+    stocksStore = useStocksStore();
+    stockService = new StockService();
 
 
     /*
@@ -72,13 +74,15 @@ export default class PortfolioIndex extends Vue {
     async editClicked(portfolio: IPortfolio): Promise<void> {
         console.log('editClicked');
         this.portfoliosStore.$state.portfolio = portfolio;
-        this.$router.push({name:'portfoliosedit', params: {id: portfolio.id}});
+        this.$router.push({ name: 'portfoliosedit', params: { id: portfolio.id } });
     }
 
     async mounted(): Promise<void> {
         console.log("mounted");
         this.portfoliosStore.$state.portfolios =
             await this.portfolioService.getAll();
+        this.stocksStore.$state.stocks =
+            await this.stockService.getAll();
     }
 
 }

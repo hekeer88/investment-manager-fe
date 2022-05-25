@@ -9,6 +9,7 @@ export interface IStock {
     comment: string | null;
     quantity: number;
     latestPrice: number;
+    balance: number;
 
     regionId: string | null;
     region: IRegion | null;

@@ -114,7 +114,7 @@ export default class StockIndex extends Vue {
     }
 
     async mounted(): Promise<void> {
-        console.log("mounted");
+        console.log("mounted stocks");
         this.stockStore.$state.stocks =
             await this.stockService.getAll();
     }
