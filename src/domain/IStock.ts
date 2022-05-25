@@ -8,6 +8,7 @@ export interface IStock {
     ticker: string;
     comment: string | null;
     quantity: number;
+    latestPrice: number;
 
     regionId: string | null;
     region: IRegion | null;

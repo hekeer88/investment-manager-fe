@@ -13,7 +13,8 @@
                 <th>Region</th>
                 <th>Industry</th>
                 <th>Portfolio</th>
-                <th>Quantity</th>
+                <th>Last Price / Quantity</th>
+                <th>Balance</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -33,7 +34,15 @@
                 <td>{{ item.region?.country }}</td>
                 <td>{{ item.industry?.name }}</td>
                 <td>{{ item.portfolio?.name }}</td>
-                <td>{{ item.quantity }}</td>
+
+                <td>
+                    <div class="ms-4">
+                        <p class="fw mb-1">${{ item.latestPrice }}</p>
+                        <p class="text-muted mb-0">{{ item.quantity }} pc</p>
+                    </div>
+                </td>
+
+                <td class="fw-bold mb-1">${{ item.latestPrice * item.quantity }}</td>
 
                 <td>
                     <button @click="addClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
@@ -89,19 +98,19 @@ export default class StockIndex extends Vue {
     async editClicked(stock: IStock): Promise<void> {
         console.log('editClicked');
         this.stockStore.$state.stock = stock;
-        this.$router.push({name:'stocksedit', params: {id: stock.id}});
+        this.$router.push({ name: 'stocksedit', params: { id: stock.id } });
     }
 
     async addClicked(stock: IStock): Promise<void> {
         console.log('addClicked');
         this.stockStore.$state.stock = stock;
-        this.$router.push({name:'transactioncreate'});
+        this.$router.push({ name: 'transactioncreate' });
     }
 
     async updateClicked(stock: IStock): Promise<void> {
         console.log('updateClicked');
         this.stockStore.$state.stock = stock;
-        this.$router.push({name:'pricecreate'});
+        this.$router.push({ name: 'pricecreate' });
     }
 
     async mounted(): Promise<void> {

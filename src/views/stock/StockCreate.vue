@@ -127,6 +127,7 @@ export default class StockCreate extends Vue {
                     industry: null,
                     region: null,
                     quantity: 0,
+                    latestPrice: 0,
                 }
             );
 

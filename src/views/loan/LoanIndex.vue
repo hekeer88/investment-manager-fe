@@ -33,7 +33,7 @@ Loan<template>
                 <td>{{ item.collateral }}</td>
                 <td>{{ formatDate(item.endDate) }}</td>
                 <td>{{ item.interest }}%</td>
-                <td>{{ item.amount }}</td>
+                <td class="fw-bold mb-1">${{ item.amount }}</td>
                 
                 <td>
                     <button @click="editClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
