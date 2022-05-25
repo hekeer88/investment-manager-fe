@@ -2,7 +2,7 @@ Loan<template>
     <h3>Loans</h3>
 
     <p>
-        <RouterLink class="btn btn-success" to="/stocks/create">Create new</RouterLink>
+        <RouterLink class="btn btn-success" to="/loans/create">Create new</RouterLink>
     </p>
 
     <table class="table align-middle mb-0 bg-white">
@@ -32,7 +32,7 @@ Loan<template>
                 <td>{{ item.borrowerName }}</td>
                 <td>{{ item.collateral }}</td>
                 <td>{{ formatDate(item.endDate) }}</td>
-                <td>{{ item.interest }}</td>
+                <td>{{ item.interest }}%</td>
                 <td>{{ item.amount }}</td>
                 
                 <td>

@@ -4,42 +4,59 @@
     <hr />
     <div class="row">
         <div class="col-md-6">
-            <div v-if="errorMsg != null" class="text-danger validation-summary-errors" data-valmsg-summary="true">
-                <ul>
-                    <li>{{ errorMsg }}</li>
-                </ul>
-            </div>
-            <div>
+            <section>
+                <div v-if="errorMsg != null" class="text-danger validation-summary-errors" data-valmsg-summary="true">
+                    <ul>
+                        <li>{{ errorMsg }}</li>
+                    </ul>
+                </div>
+                <div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="contractNumber">Contract Number</label>
+                        <input v-model="contractNumber" class="form-control" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="loanName">Loan Name</label>
+                        <input v-model="loanName" class="form-control" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="borrowerName">Borrower Name</label>
+                        <input v-model="borrowerName" class="form-control" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="amount">Amount</label>
+                        <input v-model="amount" class="form-control" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="interest">Interest</label>
+                        <input v-model="interest" class="form-control" type="text" />
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <input @click="submitClicked()" type="submit" value="Create Stock" class="btn btn-success" />
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-md-4 col-md-offset-2">
+            <section>
                 <div class="form-group">
-                    <label class="control-label" for="company">Company</label>
-                    <input v-model="company" class="form-control" type="text" />
+                    <label class="control-label" for="LoanDate">Loan Date</label>
+                    <input v-model="loanDate" class="form-control" type="date" />
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="ticker">Ticker</label>
-                    <input v-model="ticker" class="form-control" type="text" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="comment">Comment</label>
-                    <input v-model="comment" class="form-control" type="text" />
+                    <label class="control-label" for="LoanDate">Due Date</label>
+                    <input v-model="endDate" class="form-control" type="date" />
                 </div>
 
-                <div class="col-12">
-                    <label class="control-label" for="portfolioId">Choose portfolio</label>
-                    <select v-model="portfolioId" class="form-select" id="portfolioId">
-                        <option v-for="portfolio of portfoliosStore.portfolios" v-bind:value="portfolio.id"
-                            :key="portfolio.id">
-                            {{ portfolio.name }}
-                        </option>
-                    </select>
+                <div class="form-group">
+                    <label class="control-label" for="collateral">Collateral</label>
+                    <input v-model="collateral" class="form-control" type="text" />
                 </div>
-                <div class="col-12">
-                    <label class="control-label" for="industryId">Choose industry</label>
-                    <select v-model="industryId" class="form-select" id="industryId">
-                        <option v-for="industry of industriesStore.industries" v-bind:value="industry.id"
-                            :key="industry.id">
-                            {{ industry.name }}
-                        </option>
-                    </select>
+                <div class="form-group">
+                    <label class="control-label" for="scheduleType">Schedule Type</label>
+                    <input v-model="scheduleType" class="form-control" type="text" />
                 </div>
                 <div class="col-12">
                     <label class="control-label" for="regionId">Choose region</label>
@@ -50,28 +67,36 @@
                     </select>
                 </div>
                 <hr />
-                <div class="form-group">
-                    <input @click="submitClicked()" type="submit" value="Create Stock" class="btn btn-success" />
-                </div>
-            </div>
+            </section>
         </div>
+
+
+
+
     </div>
+
+
+
+
     <div>
-        <RouterLink to="/stocks">Back to List</RouterLink>
+        <RouterLink to="/loans">Back to List</RouterLink>
     </div>
 </template>
 
 
+
+
 <script lang="ts">
+
 
 import { StockService } from "@/services/StockService";
 import { usePortfoliosStore } from "@/stores/portfolios";
-import { useStocksStore } from "@/stores/stocks";
 import { useRegionsStore } from "@/stores/regions";
-import { useIndustriesStore } from "@/stores/industries";
 import { Options, Vue } from "vue-class-component";
 import { RegionService } from "@/services/RegionService";
-import { IndustryService } from "@/services/IndustryService";
+import { useLoansStore } from "@/stores/loans";
+import { now } from "moment";
+
 
 @Options({
     components: {
@@ -80,61 +105,63 @@ import { IndustryService } from "@/services/IndustryService";
     emits: [],
 })
 export default class LoanCreate extends Vue {
-    stockStore = useStocksStore();
+    loansStore = useLoansStore();
     portfoliosStore = usePortfoliosStore();
-    industriesStore = useIndustriesStore();
     regionsStore = useRegionsStore();
 
     stockService = new StockService();
     regionService = new RegionService();
-    industryService = new IndustryService();
 
-    company: string = '';
-    ticker: string = '';
-    comment: string = '';
-    regionId: string | null = null;
+    loanName: string = '';
+    borrowerName: string = '';
+    contractNumber: string = '';
+    collateral: string = '';
+    loanDate: Date = new Date();
+    endDate: Date = new Date();
+    amount: number = 0;
+    scheduleType: string = '';
+    interest: string = '';
     portfolioId: string = '';
-    industryId: string | null = null;
+    regionId: string | null = null;
     errorMsg: string | null = null;
 
 
     async submitClicked(): Promise<void> {
 
-        if (this.portfolioId.length == 0) {
-            this.errorMsg = '⛔️ Choosing portfolio is required';
-        }
 
-        else if (this.company.length > 0 &&
-            this.ticker.length > 0) {
+        // if (this.portfolioId.length == 0) {
+        //     this.errorMsg = '⛔️ Choosing portfolio is required';
+        // }
 
-            var res = await this.stockService.add(
-                {
-                    company: this.company,
-                    ticker: this.ticker,
-                    comment: this.comment,
-                    regionId: this.regionId,
-                    portfolioId: this.portfolioId,
-                    industryId: this.industryId,
-                }
-            );
+        // else if (this.company.length > 0 &&
+        //     this.ticker.length > 0) {
 
-            if (res.status >= 300) {
-                this.errorMsg = res.status + ' ' + res.errorMsg;
-            } else {
-                this.stockStore.$state.stocks =
-                    await this.stockService.getAll();
+        //     var res = await this.stockService.add(
+        //         {
+        //             company: this.company,
+        //             ticker: this.ticker,
+        //             comment: this.comment,
+        //             regionId: this.regionId,
+        //             portfolioId: this.portfolioId,
+        //             industryId: this.industryId,
+        //         }
+        //     );
 
-                this.$router.push('/stocks');
-            }
-        } else {
-            this.errorMsg = '⛔️ Please enter company name and ticker';
-        }
+        //     if (res.status >= 300) {
+        //         this.errorMsg = res.status + ' ' + res.errorMsg;
+        //     } else {
+        //         this.stockStore.$state.stocks =
+        //             await this.stockService.getAll();
+
+        //         this.$router.push('/stocks');
+        //     }
+        // } else {
+        //     this.errorMsg = '⛔️ Please enter company name and ticker';
+        // }
     }
 
     async mounted(): Promise<void> {
         console.log("mounted");
-        this.industriesStore.$state.industries =
-            await this.industryService.getAll();
         this.regionsStore.$state.regions =
             await this.regionService.getAll();
     }

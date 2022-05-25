@@ -37,17 +37,24 @@
                             </li>
                         </template>
                         <template v-else>
-                            <li class="nav-item dropdown" >
-                                <RouterLink to="/" class="nav-link dropdown-toggle text-dark"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">{{
+                            <li class="nav-item dropdown">
+                                <RouterLink to="/" class="nav-link dropdown-toggle text-dark" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">{{
                                             identityStore.jwt?.firstName
                                     }}
                                 </RouterLink>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <li class="nav-item">
-                                        <RouterLink to="/identity/account/logout" class="nav-link text-dark"
+
+                                        <div class="form-group">
+                                            <button @click="logOut()" type="button"
+                                                class="nav-link btn btn-link text-dark">
+                                                Logout
+                                            </button>
+                                        </div>
+                                        <!-- <RouterLink to="/identity/account/logout" class="nav-link text-dark"
                                             active-class="active">Logout
-                                        </RouterLink>
+                                        </RouterLink> -->
                                     </li>
 
                                 </ul>
@@ -74,9 +81,14 @@ import { RouterLink } from "vue-router";
     }
 })
 export default class Header extends Vue {
-    portfoliosStore = usePortfoliosStore();
     identityStore = useIdentityStore();
 
+    async logOut(): Promise<void> {
+        console.log("logout");
+        this.identityStore.$state.jwt = null;
+        this.$router.push('/');
+
+    }
 
 
 }

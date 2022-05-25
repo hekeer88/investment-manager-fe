@@ -1,10 +1,10 @@
 export interface ILoan {
     id?: string;
-    name: string;
     loanName:  string;
     borrowerName:  string;
     contractNumber:  string;
     collateral:  string;
+    loanDate:  Date;
     endDate:  Date;
     amount:  number;
     scheduleType:  string;
