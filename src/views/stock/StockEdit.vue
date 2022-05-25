@@ -136,6 +136,7 @@ export default class StockEdit extends Vue {
                     portfolio: null,
                     industry: null,
                     region: null,
+                    quantity: this.stock.quantity,
                 }
             );
 

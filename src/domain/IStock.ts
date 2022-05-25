@@ -7,6 +7,7 @@ export interface IStock {
     company: string;
     ticker: string;
     comment: string | null;
+    quantity: number;
 
     regionId: string | null;
     region: IRegion | null;

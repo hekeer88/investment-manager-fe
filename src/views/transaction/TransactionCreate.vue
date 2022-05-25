@@ -15,7 +15,7 @@
                         <input v-model="quantity" class="form-control" type="text" />
                     </div>
                 <div class="form-group">
-                    <label class="control-label" for="transactionPrice">Transaction Price</label>
+                    <label class="control-label" for="transactionPrice">Price</label>
                     <input v-model="transactionPrice" class="form-control" type="text" />
                 </div>
                 <div class="form-group">
@@ -43,6 +43,7 @@ import { useStocksStore } from "@/stores/stocks";
 import { Options, Vue } from "vue-class-component";
 import { TransactionService } from "@/services/TransactionService";
 import { StockService } from "@/services/StockService";
+import { isNumeric } from "jquery";
 
 
 @Options({
@@ -70,11 +71,11 @@ export default class TransactionCreate extends Vue {
 
     async submitClicked(): Promise<void> {
 
-        // if (this.portfolioId.length == 0) {
-        //     this.errorMsg = '⛔️ Choosing portfolio is required';
-        // }
+        if(!isNumeric(this.quantity) || !isNumeric(this.transactionPrice)) {
+            this.errorMsg = '⛔️ Quantity and Price must be a number';
+        } 
 
-        if (this.quantity> 0 &&
+        else if (this.quantity> 0 &&
             this.transactionPrice > 0) {
             var res = await this.transactionService.add(
                 {
@@ -97,7 +98,7 @@ export default class TransactionCreate extends Vue {
                 this.$router.push('/stocks');
             }
         } else {
-            this.errorMsg = '⛔️ Please enter company name and ticker';
+            this.errorMsg = '⛔️ Please enter price and quantity';
         }
     }
 

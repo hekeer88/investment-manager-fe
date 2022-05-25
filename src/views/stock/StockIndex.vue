@@ -13,6 +13,7 @@
                 <th>Region</th>
                 <th>Industry</th>
                 <th>Portfolio</th>
+                <th>Quantity</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -32,6 +33,8 @@
                 <td>{{ item.region?.country }}</td>
                 <td>{{ item.industry?.name }}</td>
                 <td>{{ item.portfolio?.name }}</td>
+                <td>{{ item.quantity }}</td>
+
                 <td>
                     <button @click="addClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
                         data-mdb-ripple-color="dark">

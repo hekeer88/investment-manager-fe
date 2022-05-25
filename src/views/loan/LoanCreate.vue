@@ -133,7 +133,7 @@ export default class LoanCreate extends Vue {
 
 
         if(!isNumeric(this.amount) || !isNumeric(this.interest)) {
-            this.errorMsg = '⛔️ Amount and Interest must be number only';
+            this.errorMsg = '⛔️ Amount and Interest must be a number only';
         } 
         else if (this.portfolioId.length == 0 || this.regionId.length == 0) {
             this.errorMsg = '⛔️ Choosing portfolio and region is required';
