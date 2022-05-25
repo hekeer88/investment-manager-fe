@@ -106,10 +106,6 @@ export default class StockEdit extends Vue {
     regionId: string | null = this.stock.regionId ?? null;
     portfolioId: string = this.stock.portfolioId;
     industryId: string | null = this.stock.industryId ?? null;
-    // region: IRegion | null = this.stock.region ?? null;
-    // portfolio: IPortfolio | null = this.stock.portfolio ?? null;
-    // industry: IIndustry | null = this.stock.industry ?? null;
-
 
     errorMsg: string | null = null;
 
