@@ -8,6 +8,9 @@ export const useRegionsStore = defineStore({
     regions: [] as IRegion[],
   }),
   getters: { // for doung business logic or smthig with store parameters
+    getRegionById: (state) => {
+      return (id: string) => state.regions.find((region) => region.id === id) ?? null
+    },
   },
   actions: { // if you need to modife state more complex way(in other chase u can also modify directly)
     add(region: IRegion) {

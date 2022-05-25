@@ -29,9 +29,9 @@
                     </div>
                 </td>
                 <td>{{ item.ticker }}</td>
-                <td>TODO: balance here</td>
-                <td>TODO: balance here</td>
-                <td>{{ item.portfolioId }}</td>
+                <td>{{ item.region?.country }}</td>
+                <td>{{ item.industry?.name }}</td>
+                <td>{{ item.portfolio?.name }}</td>
                 <td>
                     <button @click="editClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
                         data-mdb-ripple-color="dark">

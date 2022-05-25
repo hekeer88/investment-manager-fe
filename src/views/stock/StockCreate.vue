@@ -32,6 +32,7 @@
                         </option>
                     </select>
                 </div>
+
                 <div class="col-12">
                     <label class="control-label" for="industryId">Choose industry</label>
                     <select v-model="industryId" class="form-select" id="industryId">
@@ -41,14 +42,17 @@
                         </option>
                     </select>
                 </div>
+
                 <div class="col-12">
                     <label class="control-label" for="regionId">Choose region</label>
                     <select v-model="regionId" class="form-select" id="regionId">
-                        <option v-for="region of regionsStore.regions" v-bind:value="region.id" :key="region.id">
+                        <option v-for="region of regionsStore.regions" v-bind:value="region.id" 
+                        :key="region.id">
                             {{ region.country }}
                         </option>
                     </select>
                 </div>
+
                 <hr />
                 <div class="form-group">
                     <input @click="submitClicked()" type="submit" value="Create Stock" class="btn btn-success" />
@@ -72,6 +76,10 @@ import { useIndustriesStore } from "@/stores/industries";
 import { Options, Vue } from "vue-class-component";
 import { RegionService } from "@/services/RegionService";
 import { IndustryService } from "@/services/IndustryService";
+import type { IRegion } from "@/domain/IRegion";
+import type { IPortfolio } from "@/domain/IPortfolio";
+import type { IStock } from "@/domain/IStock";
+import type { IIndustry } from "@/domain/IIndustry";
 
 @Options({
     components: {
@@ -91,10 +99,11 @@ export default class StockCreate extends Vue {
 
     company: string = '';
     ticker: string = '';
-    comment: string = '';
-    regionId: string | null = null;
+    comment: string | null = '';
     portfolioId: string = '';
+    regionId: string | null = null;
     industryId: string | null = null;
+
     errorMsg: string | null = null;
 
 
@@ -106,7 +115,6 @@ export default class StockCreate extends Vue {
 
         else if (this.company.length > 0 &&
             this.ticker.length > 0) {
-
             var res = await this.stockService.add(
                 {
                     company: this.company,
@@ -115,6 +123,9 @@ export default class StockCreate extends Vue {
                     regionId: this.regionId,
                     portfolioId: this.portfolioId,
                     industryId: this.industryId,
+                    portfolio: null,
+                    industry: null,
+                    region: null,
                 }
             );
 

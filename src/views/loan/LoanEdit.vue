@@ -64,6 +64,9 @@
 </template>
 
 <script lang="ts">
+import type { IIndustry } from "@/domain/IIndustry";
+import type { IPortfolio } from "@/domain/IPortfolio";
+import type { IRegion } from "@/domain/IRegion";
 import type { IStock } from "@/domain/IStock";
 import { IndustryService } from "@/services/IndustryService";
 import { RegionService } from "@/services/RegionService";
@@ -99,10 +102,13 @@ export default class LoanEdit extends Vue {
     id: string = this.stock.id!;
     company: string = this.stock.company;
     ticker: string = this.stock.ticker;
-    comment: string = this.stock.comment;
+    comment: string | null = this.stock.comment;
     regionId: string | null = this.stock.regionId ?? null;
+    region: IRegion | null = this.stock.region ?? null;
     portfolioId: string = this.stock.portfolioId;
+    portfolio: IPortfolio | null = this.stock.portfolio ?? null;
     industryId: string | null = this.stock.industryId ?? null;
+    industry: IIndustry | null = this.stock.industry ?? null;
     errorMsg: string | null = null;
 
     async submitClicked(): Promise<void> {
@@ -123,8 +129,11 @@ export default class LoanEdit extends Vue {
                     ticker: this.ticker,
                     comment: this.comment ?? "",
                     regionId: this.regionId ?? null,
+                    region: this.region ?? null,
                     portfolioId: this.portfolioId,
+                    portfolio: this.portfolio ?? null,
                     industryId: this.industryId ?? null,
+                    industry: this.industry ?? null,
                 }
             );
 
