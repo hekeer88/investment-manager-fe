@@ -40,8 +40,6 @@
                     <div class="form-group">
                         <input @click="submitClicked()" type="submit" value="Create Loan" class="btn btn-success" />
                     </div>
-
-
                 </div>
             </section>
         </div>
@@ -99,6 +97,7 @@ import { RegionService } from "@/services/RegionService";
 import { useLoansStore } from "@/stores/loans";
 import { now } from "moment";
 import { LoanService } from "@/services/LoanService";
+import { isNumeric } from "jquery";
 
 
 @Options({
@@ -129,11 +128,14 @@ export default class LoanCreate extends Vue {
     errorMsg: string | null = null;
 
 
+    
     async submitClicked(): Promise<void> {
-        
 
 
-        if (this.portfolioId.length == 0 || this.regionId.length == 0) {
+        if(!isNumeric(this.amount) || !isNumeric(this.interest)) {
+            this.errorMsg = '⛔️ Amount and Interest must be number only';
+        } 
+        else if (this.portfolioId.length == 0 || this.regionId.length == 0) {
             this.errorMsg = '⛔️ Choosing portfolio and region is required';
         }
 

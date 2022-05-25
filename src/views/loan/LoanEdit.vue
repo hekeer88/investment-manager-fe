@@ -1,5 +1,5 @@
 <template>
-   Loan Edit
+    Loan Edit
     <h2>Edit Loan: {{ loansStore.loan.loanName }}</h2>
     <hr />
     <div class="row">
@@ -38,9 +38,9 @@
                     </div>
                     <hr />
                     <div class="form-group">
-                    <input @click="submitClicked()" type="submit" value="Edit" class="btn btn-secondary" />
-                    <input @click="deleteStock()" type="submit" value="Delete" class="btn btn-danger" />
-                </div>
+                        <input @click="submitClicked()" type="submit" value="Edit" class="btn btn-secondary" />
+                        <input @click="deleteStock()" type="submit" value="Delete" class="btn btn-danger" />
+                    </div>
                 </div>
             </section>
         </div>
@@ -99,6 +99,7 @@ import { usePortfoliosStore } from "@/stores/portfolios";
 import { useRegionsStore } from "@/stores/regions";
 import { useStocksStore } from "@/stores/stocks";
 import { propsToAttrMap } from "@vue/shared";
+import { isNumeric } from "jquery";
 import { Options, Vue } from "vue-class-component";
 import { RouterLink } from "vue-router";
 
@@ -138,13 +139,17 @@ export default class LoanEdit extends Vue {
     async submitClicked(): Promise<void> {
         console.log('submitClicked');
 
-        if (this.portfolioId.length == 0 || this.regionId.length == 0) {
+        if (!isNumeric(this.amount) || !isNumeric(this.interest)) {
+            this.errorMsg = '⛔️ Amount and Interest must be number only';
+        }
+
+        else if (this.portfolioId.length == 0 || this.regionId.length == 0) {
             this.errorMsg = '⛔️ Choosing portfolio and region is required';
         }
 
         else if (this.loanName.length > 0 &&
             this.borrowerName.length > 0 &&
-            this.contractNumber.length > 0 
+            this.contractNumber.length > 0
         ) {
 
             var res = await this.loanService.put(
