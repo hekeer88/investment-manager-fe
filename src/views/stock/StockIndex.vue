@@ -41,6 +41,11 @@
                         Add
                     </button>
                     |
+                    <button @click="updateClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
+                        data-mdb-ripple-color="dark">
+                        Update
+                    </button>
+                    |
                     <button @click="editClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
                         data-mdb-ripple-color="dark">
                         Edit
@@ -91,6 +96,12 @@ export default class StockIndex extends Vue {
         console.log('addClicked');
         this.stockStore.$state.stock = stock;
         this.$router.push({name:'transactioncreate'});
+    }
+
+    async updateClicked(stock: IStock): Promise<void> {
+        console.log('updateClicked');
+        this.stockStore.$state.stock = stock;
+        this.$router.push({name:'pricecreate'});
     }
 
     async mounted(): Promise<void> {

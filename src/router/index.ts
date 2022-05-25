@@ -14,6 +14,7 @@ import LoanIndex from "@/views/loan/LoanIndex.vue";
 import LoanCreate from "@/views/loan/LoanCreate.vue";
 import LoanEdit from "@/views/loan/LoanEdit.vue";
 import TransactionCreate from "@/views/transaction/TransactionCreate.vue";
+import PriceCreate from "@/views/transaction/PriceCreate.vue";
 
 
 
@@ -53,6 +54,7 @@ const router = createRouter({
     { path: "/loans/edit/:id", name: "loansedit", component: LoanEdit, props: true },
 
     { path: "/tranaction/create", name: "transactioncreate", component: TransactionCreate},
+    { path: "/price/create", name: "pricecreate", component: PriceCreate},
     
 
   ]
