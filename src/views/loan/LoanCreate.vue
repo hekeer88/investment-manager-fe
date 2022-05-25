@@ -32,10 +32,16 @@
                         <label class="control-label" for="interest">Interest</label>
                         <input v-model="interest" class="form-control" type="text" />
                     </div>
+                    <div class="form-check form-switch">
+                        <label class="form-check-label" for="collateral">Collateral loan?</label>
+                        <input v-model="collateral" class="form-check-input" type="checkbox" id="collateral">
+                    </div>
                     <hr />
                     <div class="form-group">
-                        <input @click="submitClicked()" type="submit" value="Create Stock" class="btn btn-success" />
+                        <input @click="submitClicked()" type="submit" value="Create Loan" class="btn btn-success" />
                     </div>
+
+
                 </div>
             </section>
         </div>
@@ -49,11 +55,6 @@
                     <label class="control-label" for="LoanDate">Due Date</label>
                     <input v-model="endDate" class="form-control" type="date" />
                 </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="collateral">Collateral</label>
-                    <input v-model="collateral" class="form-control" type="text" />
-                </div>
                 <div class="form-group">
                     <label class="control-label" for="scheduleType">Schedule Type</label>
                     <input v-model="scheduleType" class="form-control" type="text" />
@@ -66,18 +67,19 @@
                         </option>
                     </select>
                 </div>
+                <div class="col-12">
+                    <label class="control-label" for="portfolioId">Choose portfolio</label>
+                    <select v-model="portfolioId" class="form-select" id="portfolioId">
+                        <option v-for="portfolio of portfoliosStore.portfolios" v-bind:value="portfolio.id"
+                            :key="portfolio.id">
+                            {{ portfolio.name }}
+                        </option>
+                    </select>
+                </div>
                 <hr />
             </section>
         </div>
-
-
-
-
     </div>
-
-
-
-
     <div>
         <RouterLink to="/loans">Back to List</RouterLink>
     </div>
@@ -96,6 +98,7 @@ import { Options, Vue } from "vue-class-component";
 import { RegionService } from "@/services/RegionService";
 import { useLoansStore } from "@/stores/loans";
 import { now } from "moment";
+import { LoanService } from "@/services/LoanService";
 
 
 @Options({
@@ -109,62 +112,72 @@ export default class LoanCreate extends Vue {
     portfoliosStore = usePortfoliosStore();
     regionsStore = useRegionsStore();
 
-    stockService = new StockService();
+    loanService = new LoanService();
     regionService = new RegionService();
 
     loanName: string = '';
     borrowerName: string = '';
     contractNumber: string = '';
-    collateral: string = '';
+    collateral: boolean = false;
     loanDate: Date = new Date();
     endDate: Date = new Date();
     amount: number = 0;
     scheduleType: string = '';
-    interest: string = '';
+    interest: number = 0;
     portfolioId: string = '';
-    regionId: string | null = null;
+    regionId: string = '';
     errorMsg: string | null = null;
 
 
     async submitClicked(): Promise<void> {
+        
 
 
-        // if (this.portfolioId.length == 0) {
-        //     this.errorMsg = '⛔️ Choosing portfolio is required';
-        // }
+        if (this.portfolioId.length == 0 || this.regionId.length == 0) {
+            this.errorMsg = '⛔️ Choosing portfolio and region is required';
+        }
 
-        // else if (this.company.length > 0 &&
-        //     this.ticker.length > 0) {
+        else if (this.loanName.length > 0 &&
+            this.borrowerName.length > 0 &&
+            this.contractNumber.length > 0 
+        ) {
 
-        //     var res = await this.stockService.add(
-        //         {
-        //             company: this.company,
-        //             ticker: this.ticker,
-        //             comment: this.comment,
-        //             regionId: this.regionId,
-        //             portfolioId: this.portfolioId,
-        //             industryId: this.industryId,
-        //         }
-        //     );
+            var res = await this.loanService.add(
+                {
+                    loanName: this.loanName,
+                    borrowerName: this.borrowerName,
+                    contractNumber: this.contractNumber,
+                    collateral: this.collateral,
+                    loanDate: this.loanDate,
+                    endDate: this.endDate,
+                    amount: this.amount,
+                    scheduleType: this.scheduleType,
+                    interest: this.interest,
+                    portfolioId: this.portfolioId,
+                    regionId: this.regionId,
+                    portfolio: null,
+                    region: null,
+                }
+            );
 
-        //     if (res.status >= 300) {
-        //         this.errorMsg = res.status + ' ' + res.errorMsg;
-        //     } else {
-        //         this.stockStore.$state.stocks =
-        //             await this.stockService.getAll();
+                if (res.status >= 300) {
+                    this.errorMsg = res.status + ' ' + res.errorMsg;
+                } else {
+                    this.loansStore.$state.loans =
+                        await this.loanService.getAll();
 
-        //         this.$router.push('/stocks');
-        //     }
-        // } else {
-        //     this.errorMsg = '⛔️ Please enter company name and ticker';
-        // }
+                    this.$router.push('/loans');
+                }
+            } else {
+                this.errorMsg = '⛔️ Please enter loan name, borrower and contract number';
+            }
+        }
+
+    async mounted(): Promise < void> {
+            console.log("mounted");
+            this.regionsStore.$state.regions =
+                await this.regionService.getAll();
+        }
     }
-
-    async mounted(): Promise<void> {
-        console.log("mounted");
-        this.regionsStore.$state.regions =
-            await this.regionService.getAll();
-    }
-}
 </script>
 

@@ -1,17 +1,19 @@
+import type { IPortfolio } from "./IPortfolio";
+import type { IRegion } from "./IRegion";
+
 export interface ILoan {
     id?: string;
     loanName:  string;
     borrowerName:  string;
     contractNumber:  string;
-    collateral:  string;
+    collateral:  boolean;
     loanDate:  Date;
     endDate:  Date;
     amount:  number;
     scheduleType:  string;
     interest:  number;
     portfolioId:  string;
-    portfolioName:  string;
+    portfolio:  IPortfolio | null;
     regionId:  string;
-    country:  string;
-    continent: string;
+    region:  IRegion | null;
 }
