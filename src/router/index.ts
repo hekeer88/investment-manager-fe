@@ -27,6 +27,11 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
+    // {
+    //   path: "https://distributed22.azurewebsites.net/api/v1",
+    //   name: "index",
+    //   component: HomeView,
+    // },
     {
       path: "/identity/account/login",
       name: "login",
