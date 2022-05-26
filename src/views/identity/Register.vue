@@ -93,7 +93,7 @@ export default class Login extends Vue {
 
             
             console.log("register", res.errorMsg)
-            // this.$router.push('/portfolios');
+            this.$router.push('/identity/account/login');
 
             // console.log("res", res.status)
             // console.log("msg", res.errorMsg)
