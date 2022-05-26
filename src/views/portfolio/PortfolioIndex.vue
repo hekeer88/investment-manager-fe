@@ -29,7 +29,7 @@
                 </td>
                 <td> {{ item.stockSum }} </td>
                 <td> {{ item.loanSum }} </td>
-                <td class="fw-bold mb-1"> {{ item.loanSum +  item.loanSum}} </td>
+                <td class="fw-bold mb-1"> {{ item.loanSum + item.stockSum }} </td>
                 <td>
                     <button @click="editClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
                         data-mdb-ripple-color="dark">

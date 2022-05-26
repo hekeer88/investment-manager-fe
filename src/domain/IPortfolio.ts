@@ -3,5 +3,5 @@ export interface IPortfolio {
     name: string;
     description: string;
     loanSum: number,
-    stockSum?: number,
+    stockSum: number | 0,
 }
