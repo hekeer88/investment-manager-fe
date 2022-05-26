@@ -42,5 +42,11 @@ npm run build
 
 ### Docker
 
-docker build -t vuejs-investmentmanager/dockerize-vuejs-app .
-docker run -it -p 8080:8080 --rm --name dockerize-vuejs-app-1 vuejs-investmentmanager/dockerize-vuejs-app
+docker build -t vuejs-investmentmanager-app .
+docker run -it -p 8080:8080 --rm --name vuejs-investmentmanager-app
+
+
+docker tag vuejs-investmentmanager-app henri88/vuejs-investmentmanager-app:latest
+
+docker login -u henri88
+docker push henri88/vuejs-investmentmanager-app:latest
