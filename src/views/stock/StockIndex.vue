@@ -47,7 +47,7 @@
                 <td>
                     <button @click="addClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
                         data-mdb-ripple-color="dark">
-                        Add
+                        Add Transaction
                     </button>
                     |
                     <button @click="updateClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"

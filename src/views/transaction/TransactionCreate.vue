@@ -10,21 +10,32 @@
                 </ul>
             </div>
             <div>
-                 <div class="form-group">
-                        <label class="control-label" for="quantity">Quantity</label>
-                        <input v-model="quantity" class="form-control" type="text" />
-                    </div>
+                <div class="col-12">
+                    <label class="control-label" for="transactionType">Transaction type</label>
+                    <select v-model="transactionType" class="form-select" id="transactionType">
+                        <option v-for="transType of transactionTypeKeys" 
+                            v-bind:value="transType" :key="transType">
+                            {{ transactionTypes[Number(transType)] }}
+                        </option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label" for="quantity">Quantity</label>
+                    <input v-model="quantity" class="form-control" type="text" />
+                </div>
                 <div class="form-group">
                     <label class="control-label" for="transactionPrice">Price</label>
                     <input v-model="transactionPrice" class="form-control" type="text" />
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="control-label" for="type">Type</label>
                     <input v-model="type" class="form-control" type="text" />
-                </div>
+                </div> -->
                 <hr />
                 <div class="form-group">
-                    <input @click="submitClicked()" type="submit" value="Create Stock" class="btn btn-success" />
+                    <input @click="submitClicked()" type="submit" value="Add Transaction" class="btn btn-success" />
                 </div>
             </div>
         </div>
@@ -44,6 +55,7 @@ import { Options, Vue } from "vue-class-component";
 import { TransactionService } from "@/services/TransactionService";
 import { StockService } from "@/services/StockService";
 import { isNumeric } from "jquery";
+import { TransactionType } from "@/domain/ITransaction"
 
 
 @Options({
@@ -51,19 +63,23 @@ import { isNumeric } from "jquery";
     },
     props: {},
     emits: [],
+
 })
 export default class TransactionCreate extends Vue {
     stocksStore = useStocksStore();
     transactionService = new TransactionService();
     stockService = new StockService();
 
-     stock = this.stocksStore.stock;
+    transactionTypeKeys = Object.keys(TransactionType).filter((t) => !isNaN(Number(t)));
+    transactionTypes = TransactionType;
+    
 
+    stock = this.stocksStore.stock;
 
     quantity: number = 0;
     transactionPrice: number = 0;
     transactionDate: Date = new Date();;
-    type: string = '';
+    transactionType: number = 0;
     stockId: string = this.stock.id!;
 
     errorMsg: string | null = null;
@@ -71,21 +87,21 @@ export default class TransactionCreate extends Vue {
 
     async submitClicked(): Promise<void> {
 
-        if(!isNumeric(this.quantity) || !isNumeric(this.transactionPrice)) {
-            this.errorMsg = '⛔️ Quantity and Price must be a number';
-        } 
 
-        else if (this.quantity> 0 &&
+        if (!isNumeric(this.quantity) || !isNumeric(this.transactionPrice)) {
+            this.errorMsg = '⛔️ Quantity and Price must be a number';
+        }
+
+        else if (this.quantity > 0 &&
             this.transactionPrice > 0) {
             var res = await this.transactionService.add(
                 {
                     quantity: this.quantity,
                     transactionPrice: this.transactionPrice,
                     transactionDate: this.transactionDate,
-                    type: this.type,
+                    transactionType: this.transactionType,
                     stockId: this.stockId,
                     stock: null,
-
                 }
             );
 
@@ -109,6 +125,10 @@ export default class TransactionCreate extends Vue {
         // this.regionsStore.$state.regions =
         //     await this.regionService.getAll();
     }
+}
+
+function StringIsNumber(StringIsNumber: any) {
+    throw new Error("Function not implemented.");
 }
 </script>
 

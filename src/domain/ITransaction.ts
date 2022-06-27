@@ -5,7 +5,20 @@ export interface ITransaction {
     quantity: number;
     transactionPrice: number;
     transactionDate: Date;
-    type: string;
-    stockId:  string;
+    transactionType: number;
+    stockId: string;
     stock:  IStock | null;
+
+    
+
+    
 }
+
+export enum TransactionType {
+    Buy, 
+    Sell, 
+    Dividend, 
+    Principle, 
+    Interest 
+}
+
