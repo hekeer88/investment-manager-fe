@@ -52,7 +52,7 @@
                     |
                     <button @click="updateClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
                         data-mdb-ripple-color="dark">
-                        Update
+                        Update Price
                     </button>
                     |
                     <button @click="editClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"

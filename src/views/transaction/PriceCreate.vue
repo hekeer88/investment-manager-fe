@@ -10,10 +10,14 @@
                 </ul>
             </div>
             <div>
-                 <div class="form-group">
-                        <label class="control-label" for="currentPrice">CurrentPrice</label>
-                        <input v-model="currentPrice" class="form-control" type="text" />
-                    </div>
+                <div class="form-group">
+                    <label class="control-label" for="currentPrice">Current Price</label>
+                    <input v-model="currentPrice" class="form-control" type="text" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="PriceTime">Price Date</label>
+                    <input v-model="priceTime" class="form-control" type="date" />
+                </div>
                 <hr />
                 <div class="form-group">
                     <input @click="submitClicked()" type="submit" value="Add New Price" class="btn btn-success" />
@@ -49,11 +53,11 @@ export default class PriceCreate extends Vue {
     priceService = new PriceService();
     stockService = new StockService();
 
-     stock = this.stocksStore.stock;
+    stock = this.stocksStore.stock;
 
 
     currentPrice: number = 0;
-    priceTime: Date = new Date();
+    priceTime: string  = new Date().toISOString().substr(0, 10);
     stockId: string = this.stock.id!;
 
     errorMsg: string | null = null;
@@ -61,14 +65,14 @@ export default class PriceCreate extends Vue {
 
     async submitClicked(): Promise<void> {
 
-        if(!isNumeric(this.currentPrice)){
+        if (!isNumeric(this.currentPrice)) {
             this.errorMsg = '⛔️ Price must be a number';
-        } 
-        else if (this.currentPrice> 0) {
+        }
+        else if (this.currentPrice > 0) {
             var res = await this.priceService.add(
                 {
                     currentPrice: this.currentPrice,
-                    priceTime: this.priceTime,
+                    priceTime: new Date(this.priceTime),
                     stockId: this.stockId,
                     stock: null,
 

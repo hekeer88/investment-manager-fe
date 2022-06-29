@@ -29,10 +29,10 @@
                     <label class="control-label" for="transactionPrice">Price</label>
                     <input v-model="transactionPrice" class="form-control" type="text" />
                 </div>
-                <!-- <div class="form-group">
-                    <label class="control-label" for="type">Type</label>
-                    <input v-model="type" class="form-control" type="text" />
-                </div> -->
+                <div class="form-group">
+                    <label class="control-label" for="TransactionDate">Transaction Date</label>
+                    <input v-model="transactionDate" class="form-control" type="date" />
+                </div>
                 <hr />
                 <div class="form-group">
                     <input @click="submitClicked()" type="submit" value="Add Transaction" class="btn btn-success" />
@@ -78,7 +78,7 @@ export default class TransactionCreate extends Vue {
 
     quantity: number = 0;
     transactionPrice: number = 0;
-    transactionDate: Date = new Date();;
+    transactionDate: string  = new Date().toISOString().substr(0, 10)
     transactionType: number = 0;
     stockId: string = this.stock.id!;
 
@@ -98,7 +98,7 @@ export default class TransactionCreate extends Vue {
                 {
                     quantity: this.quantity,
                     transactionPrice: this.transactionPrice,
-                    transactionDate: this.transactionDate,
+                    transactionDate: new Date(this.transactionDate),
                     transactionType: this.transactionType,
                     stockId: this.stockId,
                     stock: null,
