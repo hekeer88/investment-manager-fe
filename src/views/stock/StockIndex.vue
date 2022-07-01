@@ -42,7 +42,7 @@
                     </div>
                 </td>
 
-                <td class="fw-bold mb-1">${{ item.latestPrice * item.quantity }}</td>
+                <td class="fw-bold mb-1">${{ item.balance }}</td>
 
                 <td>
                     <button @click="addClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
