@@ -1,0 +1,27 @@
+.navbar-collapse a {
+    color: #262633;
+    font-size: 16px;
+}
+
+.navbar-collapse a:hover {
+    color: #62ad91
+}
+
+.navbar-collapse a:focus {
+    color: #62ad91; 
+    font-weight: 450;
+}
+
+/* .nav-link:focus, .nav-link:hover {
+    color: red;
+} */
+
+/* .navbar-collapse a:active {
+    background-color: yellow;
+  } */
+
+
+/* .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link a{
+    color: red;
+} */
+

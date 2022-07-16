@@ -1,9 +1,8 @@
 <template>
     <header>
-        <nav
-            class="container navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="container navbar navbar-expand-sm navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand">Investment Manager</a>
+                <a class="navbar-brand text-dark">Investment Manager</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -13,15 +12,15 @@
 
                         <template v-if="identityStore.$state.jwt != null">
                             <li class="nav-item">
-                                <RouterLink to="/portfolios" class="nav-link text-dark" active-class="active">Portfolios
+                                <RouterLink to="/portfolios" class="nav-link" active-class="active">Portfolios
                                 </RouterLink>
                             </li>
                             <li class="nav-item">
-                                <RouterLink to="/stocks" class="nav-link text-dark" active-class="active">Stocks
+                                <RouterLink to="/stocks" class="nav-link" active-class="active">Stocks
                                 </RouterLink>
                             </li>
                             <li class="nav-item">
-                                <RouterLink to="/loans" class="nav-link text-dark" active-class="active">Loans
+                                <RouterLink to="/loans" class="nav-link" active-class="active">Loans
                                 </RouterLink>
                             </li>
                         </template>
@@ -30,11 +29,13 @@
                     <ul class="navbar-nav">
                         <template v-if="identityStore.$state.jwt == null">
                             <li class="nav-item">
-                                <RouterLink to="/identity/account/register" class="nav-link text-dark" active-class="active">Sign Up
+                                <RouterLink to="/identity/account/register" class="nav-link"
+                                    active-class="active">Sign Up
                                 </RouterLink>
                             </li>
                             <li class="nav-item">
-                                <RouterLink to="/identity/account/login" class="nav-link text-dark" active-class="active">Login
+                                <RouterLink to="/identity/account/login" class="nav-link"
+                                    active-class="active">Login
                                 </RouterLink>
                             </li>
                         </template>

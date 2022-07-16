@@ -1,10 +1,5 @@
 <!-- <style>
-
-.container {
-margin: auto;
-width: 90%;
-padding: 10px;
-}
+  @import './style.css';
 </style> -->
 
 <template>
