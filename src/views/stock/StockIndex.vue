@@ -15,7 +15,9 @@
                 <th>Portfolio</th>
                 <th>Last Price / Quantity</th>
                 <th>Balance</th>
+                <th>XIRR</th>
                 <th>Actions</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -34,7 +36,6 @@
                 <td>{{ item.region?.country }}</td>
                 <td>{{ item.industry?.name }}</td>
                 <td>{{ item.portfolio?.name }}</td>
-
                 <td>
                     <div class="ms-4">
                         <p class="fw mb-1">${{ item.latestPrice }}</p>
@@ -43,6 +44,12 @@
                 </td>
 
                 <td class="fw-bold mb-1">${{ item.balance }}</td>
+                
+                <td v-if="item.xirr >= 0" class="text-success fw-bold mb-1-success">{{ item.xirr }}%</td>
+                <td v-else class="text-danger fw-bold mb-1">{{ item.xirr }}%</td>
+                
+                
+                
 
                 <td>
                     <button @click="addClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
@@ -74,6 +81,7 @@ import type { IPortfolio } from "@/domain/IPortfolio";
 import { StockService } from "@/services/StockService";
 import type { IStock } from "@/domain/IStock";
 
+
 @Options({
     components: {
     },
@@ -86,6 +94,7 @@ export default class StockIndex extends Vue {
     stockStore = useStocksStore();
     stockService = new StockService();
 
+    
 
 
     /*

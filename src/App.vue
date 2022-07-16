@@ -39,6 +39,7 @@ export default class App extends Vue {
   portfoliosStore = usePortfoliosStore();
   portfolioService = new PortfolioService();
   identityStore = useIdentityStore();
+  
   /*
     constructor() {
       super();
