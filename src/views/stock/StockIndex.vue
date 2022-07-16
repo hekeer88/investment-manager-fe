@@ -17,7 +17,7 @@
                 <th>Balance</th>
                 <th>XIRR</th>
                 <th>Actions</th>
-                
+
             </tr>
         </thead>
         <tbody>
@@ -36,20 +36,24 @@
                 <td>{{ item.region?.country }}</td>
                 <td>{{ item.industry?.name }}</td>
                 <td>{{ item.portfolio?.name }}</td>
-                <td>
+
+                <td v-if="item.latestPrice != null">
                     <div class="ms-4">
                         <p class="fw mb-1">${{ item.latestPrice }}</p>
                         <p class="text-muted mb-0">{{ item.quantity }} pc</p>
                     </div>
                 </td>
+                <td v-else>    
+                    <p class="text-muted mb-0">No stocks yet</p>
+                </td>
 
                 <td class="fw-bold mb-1">${{ item.balance }}</td>
-                
+
                 <td v-if="item.xirr == null" class="text-muted mb-0"> - </td>
                 <td v-else-if="item.xirr >= 0" class="text-success fw-bold mb-1-success">{{ item.xirr }}%</td>
                 <td v-else class="text-danger fw-bold mb-1">{{ item.xirr }}%</td>
-                
-    
+
+
                 <td>
                     <button @click="addClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
                         data-mdb-ripple-color="dark">
@@ -93,7 +97,7 @@ export default class StockIndex extends Vue {
     stockStore = useStocksStore();
     stockService = new StockService();
 
-    
+
 
 
     /*

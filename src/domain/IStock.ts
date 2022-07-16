@@ -10,7 +10,7 @@ export interface IStock {
     comment: string | null;
     xirr: number | null;
     quantity: number;
-    latestPrice: number;
+    latestPrice: number | null;
     balance: number;
 
     regionId: string | null;
