@@ -8,7 +8,7 @@ export interface IStock {
     company: string;
     ticker: string;
     comment: string | null;
-    xirr: number | 0;
+    xirr: number | null;
     quantity: number;
     latestPrice: number;
     balance: number;

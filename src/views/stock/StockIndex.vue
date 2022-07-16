@@ -45,12 +45,11 @@
 
                 <td class="fw-bold mb-1">${{ item.balance }}</td>
                 
-                <td v-if="item.xirr >= 0" class="text-success fw-bold mb-1-success">{{ item.xirr }}%</td>
+                <td v-if="item.xirr == null" class="text-muted mb-0"> - </td>
+                <td v-else-if="item.xirr >= 0" class="text-success fw-bold mb-1-success">{{ item.xirr }}%</td>
                 <td v-else class="text-danger fw-bold mb-1">{{ item.xirr }}%</td>
                 
-                
-                
-
+    
                 <td>
                     <button @click="addClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
                         data-mdb-ripple-color="dark">
