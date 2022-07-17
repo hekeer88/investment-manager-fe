@@ -5,6 +5,7 @@ import HomeView from "../views/HomeView.vue";
 import Register from "@/views/identity/Register.vue";
 import Login from "@/views/identity/Login.vue";
 import PortfolioIndex from "@/views/portfolio/PortfolioIndex.vue";
+import PortfolioDash from "@/views/portfolio/PortfolioDash.vue";
 import PortfolioCreate from "@/views/portfolio/PortfolioCreate.vue";
 import PortfolioEdit from "@/views/portfolio/PortfolioEdit.vue";
 import StockIndex from "@/views/stock/StockIndex.vue";
@@ -15,6 +16,7 @@ import LoanCreate from "@/views/loan/LoanCreate.vue";
 import LoanEdit from "@/views/loan/LoanEdit.vue";
 import TransactionCreate from "@/views/transaction/TransactionCreate.vue";
 import PriceCreate from "@/views/transaction/PriceCreate.vue";
+import PortfolioDashVue from "@/views/portfolio/PortfolioDash.vue";
 
 
 
@@ -44,6 +46,7 @@ const router = createRouter({
     },
 
     { path: "/portfolios", name: "portfolios", component: PortfolioIndex },
+    { path: "/portfolios/dash", name: "portfoliosdash", component: PortfolioDash },
     { path: "/portfolios/index", name: "portfoliosindex", component: PortfolioIndex },
     { path: "/portfolios/create", name: "portfolioscreate", component: PortfolioCreate },
     { path: "/portfolios/edit/:id", name: "portfoliosedit", component: PortfolioEdit, props: true },

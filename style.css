@@ -12,16 +12,27 @@
     font-weight: 450;
 }
 
-/* .nav-link:focus, .nav-link:hover {
-    color: red;
-} */
+.card-title {
+    color: #737377;
+    font-size: 18px;
+}
 
-/* .navbar-collapse a:active {
-    background-color: yellow;
-  } */
+.card-amount {
+    margin-top: 12px;
+    margin-right: 12px;
+    font-weight: 700;
+    color: #3b3b42;
+    font-size: 26px;
+}
+
+.card-text {
+    color: #737377;
+    font-size: 16px;
+}
+
+.bi{
+    color: #474747;
+}
 
 
-/* .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link a{
-    color: red;
-} */
 

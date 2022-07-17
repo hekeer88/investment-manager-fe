@@ -30,11 +30,22 @@
                 <td> {{ item.stockSum }} </td>
                 <td> {{ item.loanSum }} </td>
                 <td class="fw-bold mb-1"> {{ item.loanSum + item.stockSum }} </td>
-                <td>
-                    <button @click="editClicked(item)" type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                        data-mdb-ripple-color="dark">
-                        Edit
-                    </button>
+                <td class="action-icons">
+                    <span>
+                        <button @click="getPortfolio(item)" type="button" class="btn">
+                            <i class="bi bi-eye-fill"></i>
+                        </button>
+                    </span>
+                    <span>
+                        <button @click="editClicked(item)" type="button" class="btn">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                    </span>
+                    <span>
+                        <button type="button" class="btn">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </span>
                 </td>
             </tr>
         </tbody>
@@ -75,6 +86,12 @@ export default class PortfolioIndex extends Vue {
         console.log('editClicked');
         this.portfoliosStore.$state.portfolio = portfolio;
         this.$router.push({ name: 'portfoliosedit', params: { id: portfolio.id } });
+    }
+
+    async getPortfolio(portfolio: IPortfolio): Promise<void> {
+        console.log('getPortfolio');
+        this.portfoliosStore.$state.portfolio = portfolio;
+        this.$router.push({ name: 'portfoliosdash', params: { id: portfolio.id } });
     }
 
     async mounted(): Promise<void> {

@@ -50,3 +50,6 @@ docker tag vuejs-investmentmanager-app henri88/vuejs-investmentmanager-app:lates
 
 docker login -u henri88
 docker push henri88/vuejs-investmentmanager-app:latest
+
+### Icons
+https://icons.getbootstrap.com/
